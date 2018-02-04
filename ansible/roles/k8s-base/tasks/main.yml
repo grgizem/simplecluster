@@ -1,0 +1,112 @@
+---
+- name: Ensure SSH Directories
+  become: yes
+  file:
+    path: /home/vagrant/.ssh
+    state: directory
+    owner: vagrant
+    group: vagrant
+    mode: 0700
+
+- name: Copy SSH Key Files
+  become: yes
+  copy:
+    src: files/{{ item }}
+    dest: /home/vagrant/.ssh/{{ item }}
+    owner: vagrant
+    group: vagrant
+    mode: 0600
+  with_items:
+    - id_rsa
+    - id_rsa.pub
+    - config
+
+- name: Ensure Authorized SSH Key
+  become: yes
+  authorized_key:
+    user: vagrant
+    key:  "{{ lookup('file', '/home/vagrant/.ssh/id_rsa.pub') }}"
+    state: present
+
+- name: Remove Default Host Entry
+  become: yes
+  lineinfile:
+    dest: /etc/hosts
+    regexp: '^127\.0\.0\.1\s+k8s.*$'
+    state: absent
+
+- name: Ensure Hosts File
+  become: yes
+  lineinfile:
+    dest: /etc/hosts
+    line: "172.42.42.{{ item }} k8s{{ (item|int)-1 }}"
+  with_sequence: start=2 end={{ (lookup('env', 'KUBERNETES_NUM_NODES')|default(1)|int)+2 }}
+
+- name: Ensure Google Cloud Apt Key
+  become: yes
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+  tags:
+    - k8s
+
+- name: Ensure Kubernetes Repository
+  become: yes
+  apt_repository:
+    repo: 'deb http://apt.kubernetes.io/ kubernetes-xenial main'
+    state: present
+    update_cache: yes
+  tags:
+    - k8s
+
+- name: Ensure Base Kubernetes
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - apt-transport-https
+    - docker-engine
+    - kubelet
+    - kubeadm
+    - kubectl
+    - kubernetes-cni
+    - jq
+  tags:
+    - k8s
+
+- name: Ensure Disable Fail on Swap on kubelet
+  become:
+  copy:
+    src: files/10-kubeadm.conf
+    dest: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+    mode: 0644
+    owner: root
+    group: root
+
+- name: Ensure Restart kubelet
+  become: yes
+  systemd:
+    name: kubelet
+    daemon_reload: yes
+    state: restarted
+
+- name: Ensure Docker Group
+  group:
+    name: docker
+    state: present
+
+- name: Ensure User in Docker Group
+  user:
+    name=vagrant
+    groups=docker
+    append=yes
+
+- name: Ensure Kubernetes Cleanup
+  become:
+  copy:
+    src: files/clean-k8s
+    dest: /usr/local/bin
+    mode: 0755
+    owner: root
+    group: root
