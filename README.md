@@ -23,34 +23,58 @@ KUBERNETES_MEMORY: Memory value of kubernetes
 KUBERNETES_MASTER_MEMORY: Memory of kubernetes master, this will override KUBERNETES_MEMORY (default: 1280)
 KUBERNETES_NODE_MEMORY: Memory of kubernetes nodes, this will override KUBERNETES_MEMORY (default: 2048)
 ```
+Also you can set following environment variables to use on deployments, otherwise it will ask on every deployment,
+```
+DOCKER_USERNAME: Username that you use to login to https://hub.docker.com
+DOCKER_EMAIL: Email address that you use to login to https://hub.docker.com
+DOCKER_PASSWORD: Password that you use to login to https://hub.docker.com
+```
 
 ### Start
 Start your development environment up with,
 ```
 # vagrant up
 ```
-After your environment is up deploy application easily with,
+After your environment is up deploy application easily with following command.
+Note that you will need a Docker ID. If you do not have a Docker ID, head over to https://hub.docker.com to create one.
 ```
-# deploy.sh
+# ./scripts/deploy.sh
 ```
 
-### List Nodes and Applications
-TODO
+### List Applications and Services
+You can list applications and services on cluster,
+```
+# ./scripts/list.sh
+```
 
 ### Deployment
 You can deploy local code changes to development environment with,
 ```
-# deploy.sh
+# ./scripts/deploy.sh
 ```
 
 ### Accessing Service
 TODO
 
 ### Accessing Logs
-TODO
+You can get logs of the application with,
+```
+# ./scripts/logs.sh
+```
 
 ### Clean Up
-TODO
+To clean up all applications and services with cluster,
+```
+# ./scripts/clean.sh
+```
+To clean up kubernetes from VM's,
+```
+# ./scripts/clean.sh --all
+```
+To clean up all simply run,
+```
+# vagrant destroy
+```
 
 ### Additional Resources
 https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/
