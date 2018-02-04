@@ -39,8 +39,8 @@
   become: yes
   lineinfile:
     dest: /etc/hosts
-    line: "172.42.42.{{ item }} k8s{{ (item|int)-1 }}"
-  with_sequence: start=2 end={{ (lookup('env', 'KUBERNETES_NUM_NODES')|default(1)|int)+2 }}
+    line: "172.42.42.{{ item }} k8s{{ (item|int)-2 }}"
+  with_sequence: start=2 end={{ (lookup('env', 'KUBERNETES_NUM_NODES')|default(1)|int)+3 }}
 
 - name: Ensure Google Cloud Apt Key
   become: yes
