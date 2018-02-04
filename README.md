@@ -77,6 +77,6 @@ To clean up all simply run,
 ```
 
 ### Additional Resources
-https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/
-https://github.com/coreos/flannel
+* https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/
+* https://github.com/coreos/flannel
 
