@@ -7,7 +7,7 @@ $master_ip_last_octet = 2
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  (0..1).each |i|
+  (0..1).each do |i|
     # config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
     config.vm.define "k8s#{i}" do |s|
       s.ssh.forward_agent = true
