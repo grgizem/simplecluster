@@ -7,10 +7,12 @@ Clone Git repository to your environment
 # git clone git@github.com:grgizem/simplecluster
 ```
 Install vagrant
+https://www.vagrantup.com/docs/installation/
 ```
 # apt install vagrant
 ```
 Install virtualbox
+https://www.virtualbox.org/wiki/Downloads
 ```
 # apt install virtualbox
 ```
