@@ -39,8 +39,10 @@
   become: yes
   lineinfile:
     dest: /etc/hosts
-    line: "172.42.42.{{ item }} k8s{{ (item|int)-2 }}"
-  with_sequence: start=2 end={{ (lookup('env', 'KUBERNETES_NUM_NODES')|default(1)|int)+3 }}
+    line: "{{ item.ip }} {{ item.name }}"
+  with_items:
+    - { ip: "172.42.42.2", name: "k8s0" }
+    - { ip: "172.42.42.3", name: "k8s1" }
 
 - name: Ensure Google Cloud Apt Key
   become: yes

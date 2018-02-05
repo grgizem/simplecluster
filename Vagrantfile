@@ -1,6 +1,5 @@
 VAGRANTFILE_API_VERSION = "2"
 
-$num_nodes = (ENV['KUBERNETES_NUM_NODES'] || 1).to_i+1
 $vm_master_mem = (ENV['KUBERNETES_MASTER_MEMORY'] || ENV['KUBERNETES_MEMORY'] || 1280).to_i
 $vm_node_mem = (ENV['KUBERNETES_NODE_MEMORY'] || ENV['KUBERNETES_MEMORY'] || 2048).to_i
 
@@ -8,7 +7,7 @@ $master_ip_last_octet = 2
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  $num_nodes.times do |i|
+  (0..1).each |i|
     # config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
     config.vm.define "k8s#{i}" do |s|
       s.ssh.forward_agent = true

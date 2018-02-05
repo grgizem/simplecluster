@@ -18,7 +18,6 @@ Install virtualbox
 ### Configuration
 You can use following environment variables to configure your environment:
 ```
-KUBERNETES_NUM_NODES: Number of nodes that will be launched on kubernetes cluster beside master (default: 1)
 KUBERNETES_MEMORY: Memory value of kubernetes
 KUBERNETES_MASTER_MEMORY: Memory of kubernetes master, this will override KUBERNETES_MEMORY (default: 1280)
 KUBERNETES_NODE_MEMORY: Memory of kubernetes nodes, this will override KUBERNETES_MEMORY (default: 2048)
