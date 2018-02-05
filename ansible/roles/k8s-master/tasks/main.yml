@@ -44,8 +44,8 @@
 - name: Ensure Network Start Script
   become: yes
   copy:
-    src: files/start-flannel
-    dest: /usr/local/bin/start-flannel
+    src: files/start-canal
+    dest: /usr/local/bin/start-canal
     owner: root
     group: root
     mode: 0755
