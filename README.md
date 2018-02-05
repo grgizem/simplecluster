@@ -34,7 +34,7 @@ Start your development environment up with,
 ```
 # vagrant up
 ```
-After your environment is up deploy application easily with following command.
+After your environment is up, deploy the application easily with following command.
 Note that you will need a Docker ID. If you do not have a Docker ID, head over to https://hub.docker.com to create one.
 ```
 # ./scripts/deploy.sh
@@ -65,14 +65,6 @@ You can get logs of the application with,
 ```
 
 ### Clean Up
-To clean up all applications and services with cluster,
-```
-# ./scripts/clean.sh
-```
-To clean up kubernetes from VM's,
-```
-# ./scripts/clean.sh --all
-```
 To clean up all simply run,
 ```
 # vagrant destroy
