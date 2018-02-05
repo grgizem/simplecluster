@@ -1,5 +1,5 @@
 # Simple Development Environment
-TODO
+Here is simple development environment,
 
 ### Setup
 Clone Git repository to your environment
