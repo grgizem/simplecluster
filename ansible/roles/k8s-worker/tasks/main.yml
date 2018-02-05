@@ -2,7 +2,7 @@
 - name: Copy config to home directory
   become: yes
   copy:
-    src: /vagrant/admin.conf
+    src: /vagrant/kubernetes/admin.conf
     dest: /home/vagrant/admin.conf
     owner: vagrant
     group: vagrant

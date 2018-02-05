@@ -9,7 +9,7 @@
   become: yes
   copy:
     src: /etc/kubernetes/admin.conf
-    dest: /vagrant/admin.conf
+    dest: /vagrant/kubernetes/admin.conf
     owner: vagrant
     group: vagrant
     mode: 0600
