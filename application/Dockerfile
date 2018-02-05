@@ -18,8 +18,8 @@ WORKDIR /app
 COPY . /app
 
 # Required Packages
-RUN virtualenv /env && /env/bin/pip install -r /app/requirements.txt
+RUN virtualenv --python=python2.7 /env && /env/bin/pip install -r /app/requirements.txt
 
 # Run Application
 EXPOSE 3000
-CMD ["/env/bin/python", "application.py"]
+CMD ["/env/bin/gunicorn", "-c", "gunicorn.conf", "application"]
