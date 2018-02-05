@@ -74,3 +74,11 @@ To clean up all simply run,
 * https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/
 * https://github.com/coreos/flannel
 
+#### Troubleshooting
+* If you can not access to application due to DNS problems, you can try other Pod Networking Providers. Check (3/4) on following link for instructions: https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/
+
+#### Tests
+Tested on
+* Ubuntu 17.10
+* Vagrant 1.9.1
+* Virtualbox 5.1.30
