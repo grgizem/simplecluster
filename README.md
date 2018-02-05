@@ -54,7 +54,10 @@ You can deploy local code changes to development environment with,
 ```
 
 ### Accessing Service
-TODO
+You can access to service from your browser after executing,
+```
+# ./scripts/application.sh
+```
 
 ### Accessing Logs
 You can get logs of the application with,
